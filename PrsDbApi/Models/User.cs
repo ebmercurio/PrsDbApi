@@ -17,7 +17,7 @@ namespace PrsDbSpecs {
         [StringLength(30)]
         public string Password { get; set; } = null!;
         [StringLength(30)]
-        public string FirstName { get; set; } = null!;
+        public string Firstname { get; set; } = null!;
         [StringLength(30)]
         public string Lastname { get; set; } = null!;
         [StringLength(12)]

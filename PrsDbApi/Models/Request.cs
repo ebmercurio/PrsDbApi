@@ -25,7 +25,7 @@ namespace PrsDbSpecs.Models {
         public int UserId { get; set; }
         public virtual User? User { get; set; } = null!;
 
-        public virtual List<RequestLine>? RequestLine { get; set; }
+        public virtual List<RequestLine>? RequestLines { get; set; }
         
     }
 }

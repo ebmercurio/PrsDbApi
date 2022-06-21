@@ -35,7 +35,7 @@ namespace PrsDbApi.Controllers
           {
               return NotFound();
           }
-            return await _context.Request.ToListAsync();
+            return await _context.Request.Include(x => x.User).ToListAsync();
         }
 
         // GET: api/Requests/5
@@ -46,7 +46,7 @@ namespace PrsDbApi.Controllers
           {
               return NotFound();
           }
-            var request = await _context.Request.FindAsync(id);
+            var request = await _context.Request.Include(x => x.User).Include(x => x.RequestLines).ThenInclude(x => x.Product).SingleOrDefaultAsync(x => x.Id == id);
 
             if (request == null)
             {
@@ -56,11 +56,11 @@ namespace PrsDbApi.Controllers
             return request;
         }
 
-        [HttpGet("Reviews/{id}")]
+        [HttpGet("review/{id}")]
         public async Task<ActionResult<IEnumerable<Request>>> ReviewsRequest(int id) {
 
             
-         return await _context.Request.Where(x => x.Status == REVIEW && x.UserId != id).ToListAsync();
+         return await _context.Request.Include(x => x.User).Where(x => x.Status == REVIEW && x.UserId != id).ToListAsync();
 
         }
 

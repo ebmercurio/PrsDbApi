@@ -29,7 +29,7 @@ namespace PrsDbApi.Controllers
           {
               return NotFound();
           }
-            return await _context.Product.ToListAsync();
+            return await _context.Product.Include(x => x.Vendor).ToListAsync();
         }
 
         // GET: api/Products/5
@@ -40,7 +40,7 @@ namespace PrsDbApi.Controllers
           {
               return NotFound();
           }
-            var product = await _context.Product.FindAsync(id);
+            var product = await _context.Product.Include(x => x.Vendor).SingleOrDefaultAsync(x => x.Id == id);
 
             if (product == null)
             {

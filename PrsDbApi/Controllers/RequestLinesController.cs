@@ -44,7 +44,7 @@ namespace PrsDbApi.Controllers
           {
               return NotFound();
           }
-            return await _context.RequestLine.ToListAsync();
+            return await _context.RequestLine.Include(x => x.Product).ToListAsync();
         }
 
         // GET: api/RequestLines/5
@@ -55,7 +55,7 @@ namespace PrsDbApi.Controllers
           {
               return NotFound();
           }
-            var requestLine = await _context.RequestLine.FindAsync(id);
+            var requestLine = await _context.RequestLine.Include(x => x.Product).SingleOrDefaultAsync(x => x.Id == id);
 
             if (requestLine == null)
             {
